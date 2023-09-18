@@ -36,10 +36,11 @@ def display(self):
     def sortedAdd(self, value):
 
     def remove(self, idx):
-    # find the maximum values in the list
-    
+
+# find the maximum values in the list
     def findMax(self):
         return max_value in list
+    
 # print linkedlist in a reversed order
     def printReversedList(self):
         if __name__ == '__main__':
@@ -47,11 +48,11 @@ def display(self):
             list = LinkedList()
 # Your testcase will be here.
 # This is a testcase example.
-list.sortedAdd(5)
-list.sortedAdd(2)
-list.sortedAdd(9)
-list.sortedAdd(1)
-list.sortedAdd(7)
-print(list.findMax())
-list.printReversedList()
+#list.sortedAdd(5)
+#list.sortedAdd(2)
+#list.sortedAdd(9)
+#list.sortedAdd(1)
+#list.sortedAdd(7)
+#print(list.findMax())
+#list.printReversedList()
 #################################
