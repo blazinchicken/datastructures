@@ -1,8 +1,8 @@
 #Kyron Barrow Linked List 
 
-#Name:
-#ID:
-#Email:
+#Name: Kyron Barrow
+#ID:   08865495
+#Email:kyronbarrow@unomaha.edu
 # You are not allowed to modify this class
 class Node:
     def __init__(self, data):
