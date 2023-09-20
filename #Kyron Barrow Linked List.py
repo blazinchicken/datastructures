@@ -34,7 +34,7 @@ def display(self):
 # You can change the return values (from void to any) for each function as you want
 # you can add functions as you want
     def sortedAdd(self, value):
-
+        
     def remove(self, idx):
 
 # find the maximum values in the list
@@ -46,6 +46,8 @@ def display(self):
         if __name__ == '__main__':
 ## instantiating the linked list
             list = LinkedList()
+
+            
 # Your testcase will be here.
 # This is a testcase example.
 #list.sortedAdd(5)
