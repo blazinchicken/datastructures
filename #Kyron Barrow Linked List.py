@@ -70,15 +70,30 @@ class LinkedList:
         
 # find the maximum values in the list
     def findMax(self):
+
+        max_value = 0
+        current = self.head
         #count through the idx, this can be done by using the self.count 
+        for i in range(self.count - 1):
         #compare current.data & current.next.data
+            if current.data > current.next.data:
+                max_value = current.data
+            elif current.data < current.next.data:
+                max_value = current.next.data
+            
+            current = current.next
+            
         #set the higher one to be max_value, then try again, counting to self.count-1
         #then return the found value
-        return max_value in list
+        
+        return max_value in list    
     
 # print linkedlist in a reversed order
     def printReversedList(self):
+        listArray = list(self.count) 
         #make an array with self.count (self.count-1) pieces of data, count through the list, making current.data == array[i]
+        for i in range(self.count):
+            
         #this creates the list in order, then make another reverse array
         #you set arrayTw0[i] = array[self.count-1-i] within a for loop
         #then in the next for loop print the array
