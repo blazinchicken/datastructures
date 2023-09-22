@@ -49,8 +49,15 @@ class LinkedList:
             self.count += 1
             return
         # needs to set another variable to the head, then cycle through to the spot where the next value is higher than the current value, then insert into that spot. 
+        current = self.head
+        while current.next and value >= current.next.data:
+            current = current.next
 
-        # to do this you need to set the current.next.next = new.next; current.next = new
+        new.next = current.next
+        current.next = new
+        self.count += 1
+
+        # to do this you need to set the new.next = current.next; current.next = new
 
 
         
@@ -124,11 +131,11 @@ if __name__ == '__main__':
 
 # Your testcase will be here.
 # This is a testcase example.
-#list.sortedAdd(5)
-#list.sortedAdd(2)
-#list.sortedAdd(9)
-#list.sortedAdd(1)
-#list.sortedAdd(7)
-#print(list.findMax())
-#list.printReversedList()
+list.sortedAdd(5)
+list.sortedAdd(2)
+list.sortedAdd(9)
+list.sortedAdd(1)
+list.sortedAdd(7)
+print(list.findMax())
+list.printReversedList()
 #################################
