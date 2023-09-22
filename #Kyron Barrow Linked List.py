@@ -43,7 +43,13 @@ class LinkedList:
             self.count += 1 
             return
         # still needs to add to the back if data < head data
+        if value < self.head.data:
+            new.next = self.head
+            self.head = new
+            self.count += 1
+            return
         # needs to set another variable to the head, then cycle through to the spot where the next value is higher than the current value, then insert into that spot. 
+
         # to do this you need to set the current.next.next = new.next; current.next = new
 
 
@@ -67,6 +73,7 @@ class LinkedList:
               current.next = None
               return
         current.next = current.next.next
+        return
         
         
 # find the maximum values in the list
@@ -108,10 +115,11 @@ class LinkedList:
             print(listReversedArray[i])
             print(" ")
         #then in the next for loop print the array
+        return
 
-        if __name__ == '__main__':
+if __name__ == '__main__':
 ## instantiating the linked list
-            list = LinkedList()
+    list = LinkedList()
 
 
 # Your testcase will be here.
