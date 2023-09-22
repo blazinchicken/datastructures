@@ -22,9 +22,9 @@ class LinkedList:
 ## variable for iteration
         temp_node = self.head
 ## iterating until we reach the end of the linked list
-        while temp_node != None:
+        while temp_node is not None:
 ## printing the node data
-            print(temp_node.data, end='->')
+            print(temp_node.data, end=' -> ')
 ## moving to the next node
             temp_node = temp_node.next
         print('Null')
@@ -104,23 +104,20 @@ class LinkedList:
         #set the higher one to be max_value, then try again, counting to self.count-1
         #then return the found value
         
-        return max_value in list    
+        return max_value     
     
 # print linkedlist in a reversed order
     def printReversedList(self):
         current = self.head
-        listArray = list(self.count) 
-        listReversedArray = list(self.count)
-        #make an array with self.count (self.count-1) pieces of data, count through the list, making current.data == array[i]
-        for i in range(self.count):
-            listArray[i] = current.data
-        #this creates the list in order, then make another reverse array
-        for i in range(self.count):
-            listReversedArray[i] = listArray[self.count-1-i]
-        #you set arrayTw0[i] = array[self.count-1-i] within a for loop
-        for i in range(self.count):
-            print(listReversedArray[i])
-            print(" ")
+        listArray = [] 
+        #make empty list, fill with data from list
+        while current is not None:
+            listArray.append(current.data)
+            current = current.next
+        #this creates the list in order
+        for i in range(len(listArray) - 1, -1, -1):
+            print(listArray[i])
+        #this prints backwards using the reverse count feature of range()
         #then in the next for loop print the array
         return
 
@@ -136,6 +133,9 @@ list.sortedAdd(2)
 list.sortedAdd(9)
 list.sortedAdd(1)
 list.sortedAdd(7)
+list.sortedAdd(2)
+list.sortedAdd(13)
+list.display()
 print(list.findMax())
 list.printReversedList()
 #################################
