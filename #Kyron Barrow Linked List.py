@@ -69,7 +69,7 @@ class LinkedList:
         current = self.head
        
         #check to see if idx is within the bounds
-        if idx > self.count or idx <= 0:
+        if idx > self.count or idx < 0:
             return
         
         if idx == 0:
@@ -97,7 +97,7 @@ class LinkedList:
         max_value = current.data
         
         if self.count == 1:
-            return
+            return max_value
         #count through the idx, this can be done by using the self.count 
         for i in range(self.count - 1):
         #compare current.data & current.next.data
@@ -136,14 +136,10 @@ if __name__ == '__main__':
 # Your testcase will be here.
 # This is a testcase example.
 list.sortedAdd(5)
-list.sortedAdd(2)
-list.sortedAdd(9)
-list.sortedAdd(1)
-list.sortedAdd(7)
-list.sortedAdd(2)
-list.sortedAdd(13)
-list.sortedAdd(923)
 list.display()
+print(list.findMax())
+
+
 #print(list.findMax())
 #list.printReversedList()
 #################################
