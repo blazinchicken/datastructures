@@ -67,17 +67,24 @@ class LinkedList:
             return
         
         current = self.head
+       
         #check to see if idx is within the bounds
         if idx > self.count or idx <= 0:
             return
+        
+        if idx == 0:
+            self.head = current.next
+            current.next = None
+            return
+
         #remove based on idx-1
             #cycle through the list till the item before the idx that needs to be removed
         for x in range(idx-1):
             current = current.next
         #set the new item to be linked
             #check to see if this is removing the last of the list
-        if current.next.next == None:
-              current.next = None
+        if current.next == None:
+              current = None
               return
         current.next = current.next.next
         return
@@ -137,6 +144,6 @@ list.sortedAdd(2)
 list.sortedAdd(13)
 list.sortedAdd(923)
 list.display()
-print(list.findMax())
-list.printReversedList()
+#print(list.findMax())
+#list.printReversedList()
 #################################
