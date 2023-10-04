@@ -114,6 +114,11 @@ class LinkedList:
         return max_value     
     
 # print linkedlist in a reversed order
+#######################################
+
+#needs redesign, start with counting through linked list - 1, then print, then repeat for linked list - 2, -3,..., -n
+#this is O(n^2)
+#use print with end command as a space, this will allow for no new line
     def printReversedList(self):
         current = self.head
         listArray = [] 
