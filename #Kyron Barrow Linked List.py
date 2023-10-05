@@ -95,7 +95,8 @@ class LinkedList:
 
         current = self.head
         max_value = current.data
-        
+        if self.head == None:
+            return
         if self.count == 1:
             return max_value
         #count through the idx, this can be done by using the self.count 
@@ -120,19 +121,22 @@ class LinkedList:
 #this is O(n^2)
 #use print with end command as a space, this will allow for no new line
     def printReversedList(self):
-        current = self.head
-        listArray = [] 
+        #####################################
+        #current = self.head
+        #listArray = [] 
         #make empty list, fill with data from list
-        while current is not None:
-            listArray.append(current.data)
-            current = current.next
+        #while current is not None:
+        #   listArray.append(current.data)
+        #    current = current.next
         #this creates the list in order
-        for i in range(len(listArray) - 1, -1, -1):
-            print(listArray[i])
+        #for i in range(len(listArray) - 1, -1, -1):
+        #    print(listArray[i])
         #this prints backwards using the reverse count feature of range()
         #then in the next for loop print the array
-        return
+        #return
+        ############################## (PREVIOUS ITERATION)
 
+        
 if __name__ == '__main__':
 ## instantiating the linked list
     list = LinkedList()
