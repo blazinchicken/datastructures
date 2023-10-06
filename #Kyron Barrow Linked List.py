@@ -133,10 +133,11 @@ class LinkedList:
         #    print(listArray[i])
         #this prints backwards using the reverse count feature of range()
         #then in the next for loop print the array
-        #return
-        ############################## (PREVIOUS ITERATION)
+        #######################################(PREVIOUS ITERATION)
+        return
+       
 
-        
+
 if __name__ == '__main__':
 ## instantiating the linked list
     list = LinkedList()
