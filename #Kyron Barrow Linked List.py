@@ -134,6 +134,22 @@ class LinkedList:
         #this prints backwards using the reverse count feature of range()
         #then in the next for loop print the array
         #######################################(PREVIOUS ITERATION)
+        current = self.head
+        reverse = 1
+        if self.head == None:  #error handling for empty list
+            return
+        if self.count == 1:  #error handling for single length list
+            print(self.head.data)
+            return
+
+        for i in range(self.count):
+            temp = current
+            for j in range(self.count - reverse):
+                temp = temp.next
+
+            print(temp.data, end=" ")    
+            reverse += 1
+        print()
         return
        
 
@@ -146,8 +162,17 @@ if __name__ == '__main__':
 # Your testcase will be here.
 # This is a testcase example.
 list.sortedAdd(5)
+list.sortedAdd(3)
+list.sortedAdd(1)
+list.sortedAdd(6)
+list.sortedAdd(8)
+list.sortedAdd(9)
 list.display()
 print(list.findMax())
+list.printReversedList()
+list.sortedAdd(2)
+list.display()
+list.printReversedList()
 
 
 #print(list.findMax())
