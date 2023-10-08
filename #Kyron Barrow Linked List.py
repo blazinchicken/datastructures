@@ -142,7 +142,9 @@ class LinkedList:
             print(self.head.data)
             return
 
-        for i in range(self.count):
+        for i in range(self.count): #iterates through the list, this takes a temp value to cycle through to the end of the list then print that value
+                                    # it then counts up one and forces the second to last value to be printed
+                                    #it does this until no value is left to be printed
             temp = current
             for j in range(self.count - reverse):
                 temp = temp.next
