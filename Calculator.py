@@ -18,26 +18,56 @@ class Calculator:
         # Keep the pseudo code (for loops) below with your code.
         #==================================================================================================
         #for c in infix:
+        for c in infix:
+
         #    if c == '(' stack.push(c):
-        if c == '(':
-            self.stack.push(c)
-            
+            if c == '(':              
+                self.stack.push(c)
+
         #    else if c == ')':
+            elif c == ')':
+
         #        while stack.isEmpty() == false && stack.peek() != '(':
+                while self.stack.isEmpty() == False and self.stack.peek() != '(':
+                    
         #            poped_char = stack.pop() and postfix.append(poped_char)
+                    poped_char = self.stack.pop()
+                    postfix.append(poped_char)
+
         #    else if c == '+' || c == '-':
+            elif c == '+' or c == '-':
+
         #        while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’ || ‘+’ || ‘-’
+                while self.stack.isEmpty() == False and self.stack.peek() == '/' or '*' or '+' or '-':
+
         #            poped_char = stack.pop() and postfix.append(poped_char)
+                    poped_char = self.stack.pop() and postfix.append(poped_char)
+
         #    else if c == ‘/’ || c == ‘*’
+            elif c == '/' or c == '*':
+
         #        while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’
+                while self.stack.isEmpty() == False and self.stack.peek() == '/' or '*':
+
         #            poped_char = stack.pop() and postfix.append(poped_char)
+                    poped_char = self.stack.pop()
+                    postfix.append(poped_char)
+
         #    else:
+            else:
+
         #        stack.push(c)
+                self.stack.push(c)
 
         #while stack.isEmpty() == false:
+        while self.stack.isEmpty() == False:
+
         #    poped_char = stack.pop() and postfix.append(poped_char)
+            poped_char = self.stack.pop()
+            postfix.append(poped_char)
 
         #return postfix
+        return postfix
         #==================================================================================================
     # This Return double for division
     def evaluate(self, postfix):
@@ -46,7 +76,8 @@ class Calculator:
         
         # Keep the instructions below with your code.
         # implement as directed
-        #• Repeat
+        for c in postfix: #• Repeat
+            if c == 
         #• If operand, push onto stack
         #• If operator
         #   • pop operands off the stack
