@@ -77,12 +77,35 @@ class Calculator:
         # Keep the instructions below with your code.
         # implement as directed
         for c in postfix: #• Repeat
-            if c == 
-        #• If operand, push onto stack
-        #• If operator
-        #   • pop operands off the stack
-        #   • evaluate operator on operands
-        #   • push result onto stack
+            if c in range(10):
+                self.stack.append(float(char)) #• If operand, push onto stack
+            elif c is '+' or '-' or '*' or '/' or '^': #• If operator
+                if len(self.stack) < 2:
+                    return
+                operand2 = self.stack.pop() #   • pop operands off the stack
+                operand1 = self.stack.pop()
+                if c == '+':    #   • evaluate operator on operands
+                    self.stack.append(operand1 + operand2)  #   • push result onto stack
+                elif c == '-':  #   • evaluate operator on operands
+                    self.stack.append(operand1 - operand2)   #   • push result onto stack
+                elif c == '*':  #   • evaluate operator on operands
+                    self.stack.append(operand1 * operand2)   #   • push result onto stack
+                elif c == '/':  #   • evaluate operator on operands
+                    if operand2 == 0:
+                        return
+                    self.stack.append(operand1 / operand2)   #   • push result onto stack
+                elif c == '^':  #   • evaluate operator on operands
+                    if operand2 == 0:
+                        self.stack.append(1)
+                    else:
+                        self.stack.append(operand1 ** operand2)  #   • push result onto stack
+                else:   
+                    return
+                
+
+        
+        
+       
         #• Until expression is read
         #• Return top of stack
 
