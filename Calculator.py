@@ -9,7 +9,7 @@ class Calculator:
     def convert(self, infix):
         # use a stack to covert infix to postfix
         self.stack.clear()
-        postfix = "postfix from infix"# output
+        postfix = []# output
         
         # You are not allowed to add additional functions e.g., precedence(), isOperator(), etc.
         # You are not allowed to create variables using a list or a dictionary like below. 
@@ -22,45 +22,35 @@ class Calculator:
 
         #    if c == '(' stack.push(c):
             if c == '(':              
-                self.stack.push(c)
-
+                self.stack.append(c)
         #    else if c == ')':
             elif c == ')':
-
         #        while stack.isEmpty() == false && stack.peek() != '(':
-                while self.stack.isEmpty() == False and self.stack.peek() != '(':
-                    
+                while self.stack and self.stack[-1] != '(':
         #            poped_char = stack.pop() and postfix.append(poped_char)
                     poped_char = self.stack.pop()
                     postfix.append(poped_char)
-
         #    else if c == '+' || c == '-':
             elif c == '+' or c == '-':
-
         #        while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’ || ‘+’ || ‘-’
-                while self.stack.isEmpty() == False and self.stack.peek() == '/' or '*' or '+' or '-':
-
-        #            poped_char = stack.pop() and postfix.append(poped_char)
-                    poped_char = self.stack.pop() and postfix.append(poped_char)
-
-        #    else if c == ‘/’ || c == ‘*’
-            elif c == '/' or c == '*':
-
-        #        while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’
-                while self.stack.isEmpty() == False and self.stack.peek() == '/' or '*':
-
+                while self.stack and (self.stack[-1] == '/' or self.stack[-1] == '*' or self.stack[-1] == '+' or self.stack[-1] == '-'):
         #            poped_char = stack.pop() and postfix.append(poped_char)
                     poped_char = self.stack.pop()
                     postfix.append(poped_char)
-
+        #    else if c == ‘/’ || c == ‘*’
+            elif c == '/' or c == '*' or c == '^':
+        #        while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’
+                while self.stack and (self.stack[-1] == '/' or self.stack[-1] == '*' or self.stack[-1] == '^'):
+        #            poped_char = stack.pop() and postfix.append(poped_char)
+                    poped_char = self.stack.pop()
+                    postfix.append(poped_char)
         #    else:
             else:
-
         #        stack.push(c)
-                self.stack.push(c)
+                self.stack.append(c)
 
         #while stack.isEmpty() == false:
-        while self.stack.isEmpty() == False:
+        while self.stack:
 
         #    poped_char = stack.pop() and postfix.append(poped_char)
             poped_char = self.stack.pop()
@@ -77,9 +67,9 @@ class Calculator:
         # Keep the instructions below with your code.
         # implement as directed
         for c in postfix: #• Repeat
-            if c in range(10):
-                self.stack.append(float(char)) #• If operand, push onto stack
-            elif c is '+' or '-' or '*' or '/' or '^': #• If operator
+            if isinstance(c, (int,float)):  #• If operand, push onto stack
+                self.stack.append(float(c)) 
+            elif c in ['+', '-', '*', '/', '^']: #• If operator
                 if len(self.stack) < 2:
                     return
                 operand2 = self.stack.pop() #   • pop operands off the stack
@@ -99,25 +89,19 @@ class Calculator:
                         self.stack.append(1)
                     else:
                         self.stack.append(operand1 ** operand2)  #   • push result onto stack
-                else:   
+                else:   #• Until expression is read
                     return
                 
-
-        
-        
-       
-        #• Until expression is read
-        #• Return top of stack
-
-        result = 0
-        return result
-
+        if len(self.stack) == 1:
+            return self.stack[0] #• Return top of stack
+        else:
+            return
 
 if __name__ == '__main__':
     ## instantiating the linked list
     cal = Calculator()
 
-    #input = ; # Get input from a user
+    input = input("Enter Equation: ") # Get input from a user
 
     postfix = cal.convert(input)
     print(postfix)
