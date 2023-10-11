@@ -16,12 +16,29 @@ class Calculator:
         #    priority = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
         #    operators = ['(', ')', '-', '+', '*', '/', '^']
         # Keep the pseudo code (for loops) below with your code.
+        #elif c == '/' or '*':
+        #       while self.stack and (self.stack[-1] == "*" or self.stack[-1] == '/'):
+        #            poped_char = self.stack.pop()
+        #            postfix.append(poped_char)
+        #        self.stack.append(c)
         #==================================================================================================
         #for c in infix:
         for c in infix:
-
-        #    if c == '(' stack.push(c):
-            if c == '(':              
+            if c.isdigit():
+                postfix.append(c)
+        #    else if c == '+' || c == '-':
+            elif c in ['+','-']:
+                while self.stack and (self.stack[-1] in ['+','-','*','/']): #        while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’ || ‘+’ || ‘-’
+                    poped_char = self.stack.pop()   #poped_char = stack.pop() and postfix.append(poped_char)
+                    postfix.append(poped_char)
+                self.stack.append(c)
+            elif c in ['/','*']: #    else if c == ‘/’ || c == ‘*’
+                    while self.stack and (self.stack[-1] in ['/','*']): #     while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’
+                        poped_char = self.stack.pop()    #         poped_char = stack.pop() and postfix.append(poped_char)
+                        postfix.append(poped_char)
+                    self.stack.append(c)
+            #elif c == '(' stack.push(c):
+            elif c == '(':              
                 self.stack.append(c)
         #    else if c == ')':
             elif c == ')':
@@ -30,25 +47,8 @@ class Calculator:
         #            poped_char = stack.pop() and postfix.append(poped_char)
                     poped_char = self.stack.pop()
                     postfix.append(poped_char)
-        #    else if c == '+' || c == '-':
-            elif c == '+' or c == '-':
-        #        while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’ || ‘+’ || ‘-’
-                while self.stack and (self.stack[-1] == '/' or self.stack[-1] == '*' or self.stack[-1] == '+' or self.stack[-1] == '-'):
-        #            poped_char = stack.pop() and postfix.append(poped_char)
-                    poped_char = self.stack.pop()
-                    postfix.append(poped_char)
-        #    else if c == ‘/’ || c == ‘*’
-            elif c == '/' or c == '*' or c == '^':
-        #        while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’
-                while self.stack and (self.stack[-1] == '/' or self.stack[-1] == '*' or self.stack[-1] == '^'):
-        #            poped_char = stack.pop() and postfix.append(poped_char)
-                    poped_char = self.stack.pop()
-                    postfix.append(poped_char)
-        #    else:
-            else:
-        #        stack.push(c)
-                self.stack.append(c)
-
+                self.stack.pop()
+     
         #while stack.isEmpty() == false:
         while self.stack:
 
@@ -67,8 +67,8 @@ class Calculator:
         # Keep the instructions below with your code.
         # implement as directed
         for c in postfix: #• Repeat
-            if isinstance(c, (int,float)):  #• If operand, push onto stack
-                self.stack.append(float(c)) 
+            if c.isdigit():
+                self.stack.append(float(c))
             elif c in ['+', '-', '*', '/', '^']: #• If operator
                 if len(self.stack) < 2:
                     return
