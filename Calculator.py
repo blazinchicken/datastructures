@@ -28,15 +28,20 @@ class Calculator:
                 postfix.append(c)
         #    else if c == '+' || c == '-':
             elif c in ['+','-']:
-                while self.stack and (self.stack[-1] in ['+','-','*','/']): #        while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’ || ‘+’ || ‘-’
+                while self.stack and (self.stack[-1] in ['+','-','*','/','^']): #        while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’ || ‘+’ || ‘-’
                     poped_char = self.stack.pop()   #poped_char = stack.pop() and postfix.append(poped_char)
                     postfix.append(poped_char)
                 self.stack.append(c)
             elif c in ['/','*']: #    else if c == ‘/’ || c == ‘*’
-                    while self.stack and (self.stack[-1] in ['/','*']): #     while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’
-                        poped_char = self.stack.pop()    #         poped_char = stack.pop() and postfix.append(poped_char)
-                        postfix.append(poped_char)
-                    self.stack.append(c)
+                while self.stack and (self.stack[-1] in ['/','*','^']): #     while stack.isEmpty() == false && stack.peek() == ‘/’ || ‘*’
+                    poped_char = self.stack.pop()    #         poped_char = stack.pop() and postfix.append(poped_char)
+                    postfix.append(poped_char)
+                self.stack.append(c)
+            elif c == '^':
+                while self.stack and (self.stack[-1] in ['^']):
+                    poped_char = self.stack.pop()
+                    postfix.append(poped_char)
+                self.stack.append(c)
             #elif c == '(' stack.push(c):
             elif c == '(':              
                 self.stack.append(c)
