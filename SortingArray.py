@@ -136,7 +136,7 @@ def generateRandomNumbers(cnt, type):
     if type == 1: #type 1
         copyNumber = 0
         for i in range(cnt):
-            arr[i] = 
+            arr[i] = randint(1,cnt)
         return arr
     elif type == 2: #type 2
         copyNumber = 0
