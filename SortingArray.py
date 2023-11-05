@@ -4,6 +4,7 @@
 
 import math
 from random import randint
+import sys
 
 def bubbleSort(arr):
     n = len(arr)
@@ -166,14 +167,20 @@ if __name__ == '__main__':
     # Timer Start
 
 	# Sorting method will be provided as the second parameter for main args[2]
-	# 1: Bubble Sort
-	# 2: Selection Sort
-	# 3: Insertion Sort
-	# 4: Shell Sort
-	# 5: Merge Sort
-	# 6: Quick Sort
-	# Else: Not supported
-
+	if args[2] == 1:# 1: Bubble Sort
+        
+	elif args[2] == 2:# 2: Selection Sort
+        
+	elif args[2] == 3:# 3: Insertion Sort
+        
+	elif args[2] == 4:# 4: Shell Sort
+        
+	elif args[2] == 5:# 5: Merge Sort
+        
+	elif args[2] == 6:# 6: Quick Sort
+        
+	else:# Else: Not supported
+        return
 	#Timer end
 	#Print elapsed time for sorting.
 
