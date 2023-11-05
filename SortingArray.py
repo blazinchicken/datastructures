@@ -132,6 +132,14 @@ def generateRandomNumbers(cnt, type):
     # This function will generate Integer array of which size is cnt.
     # The range of the generated numbers is 0 ~ cnt
     # type: 1: totally random numbers, 2: sorted_numbers, 3: reverse-order_numbers, else: not supported
+    if type == 1: #type 1
+
+    elif type == 2: #type 2
+
+    elif type == 3: #type 3
+    
+    else:
+        return
     print("This line is only for running skeleton code. Remove this line.")
 
 if __name__ == '__main__':
