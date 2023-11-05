@@ -3,6 +3,7 @@
 #Email: kyronbarrow@unomaha.edu
 
 import math
+import random
 
 def bubbleSort(arr):
     n = len(arr)
@@ -133,8 +134,17 @@ def generateRandomNumbers(cnt, type):
     # The range of the generated numbers is 0 ~ cnt
     # type: 1: totally random numbers, 2: sorted_numbers, 3: reverse-order_numbers, else: not supported
     if type == 1: #type 1
-
+        copyNumber = 0
+        for i in range(cnt):
+            arr[i] = 
+        return arr
     elif type == 2: #type 2
+        copyNumber = 0
+        for i in range(cnt):
+            arr[i] = copyNumber
+            copyNumber += 1
+        return arr
+
 
     elif type == 3: #type 3
     
