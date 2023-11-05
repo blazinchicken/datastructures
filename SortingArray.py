@@ -3,7 +3,7 @@
 #Email: kyronbarrow@unomaha.edu
 
 import math
-import random
+from random import randint
 
 def bubbleSort(arr):
     n = len(arr)
@@ -136,21 +136,22 @@ def generateRandomNumbers(cnt, type):
     if type == 1: #type 1
         copyNumber = 0
         for i in range(cnt):
-            arr[i] = randint(1,cnt)
+            arr.append = randint(1,cnt)
         return arr
+    
     elif type == 2: #type 2
         copyNumber = 0
         for i in range(cnt):
-            arr[i] = copyNumber
+            arr.append = copyNumber
             copyNumber += 1
         return arr
 
 
     elif type == 3: #type 3
+        copyNumber = 0 
     
     else:
         return
-    print("This line is only for running skeleton code. Remove this line.")
 
 if __name__ == '__main__':
     # The parameters from the execution will be used as prameters for the generateRandomNumbers function below.
