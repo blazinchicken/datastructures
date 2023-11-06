@@ -5,6 +5,7 @@
 import math
 from random import randint
 import sys
+import time
 
 def bubbleSort(arr):
     n = len(arr)
@@ -134,56 +135,59 @@ def generateRandomNumbers(cnt, type):
     # This function will generate Integer array of which size is cnt.
     # The range of the generated numbers is 0 ~ cnt
     # type: 1: totally random numbers, 2: sorted_numbers, 3: reverse-order_numbers, else: not supported
+    arr = []
+
     if type == 1: #type 1
-        copyNumber = 0
         for i in range(cnt):
             arr.append = randint(1,cnt)
         return arr
     
     elif type == 2: #type 2
-        copyNumber = 0
         for i in range(cnt):
-            arr.append = copyNumber
-            copyNumber += 1
+            arr.append(i)
         return arr
 
 
     elif type == 3: #type 3
-        copyNumber = 0 
+        for i in range(cnt, 0, -1):
+            arr.append(i)
+        return arr
     
     else:
-        return
+        return None
 
 if __name__ == '__main__':
     # The parameters from the execution will be used as prameters for the generateRandomNumbers function below.
     # You must receive parameters from the command lines like below.
     # > python3 SortingArray.py 3 1000000 6 (create reverse-order numbers (0-1000000 and sort it using QuickSort) 
-    arr = generateRandomNumbers( , )
+    arr = generateRandomNumbers(sys.argv[1],sys.argv[2])
 
     if len(arr) < 100:
         print('Before sort: ')
         printArray(arr)
 
     # Timer Start
-
+    time_start = time.time()
 	# Sorting method will be provided as the second parameter for main args[2]
-	if args[2] == 1:# 1: Bubble Sort
-        
-	elif args[2] == 2:# 2: Selection Sort
-        
-	elif args[2] == 3:# 3: Insertion Sort
-        
-	elif args[2] == 4:# 4: Shell Sort
-        
-	elif args[2] == 5:# 5: Merge Sort
-        
-	elif args[2] == 6:# 6: Quick Sort
-        
-	else:# Else: Not supported
-        return
+    if sys.argv[3] == 1: # 1: Bubble Sort
+        bubbleSort(arr)
+    elif sys.argv[3] == 2:# 2: Selection Sort
+        selectionSort(arr)
+    elif sys.argv[3] == 3:# 3: Insertion Sort
+        insertionSort(arr)
+    elif sys.argv[3] == 4:# 4: Shell Sort
+        shellSort(arr)
+    elif sys.argv[3] == 5:# 5: Merge Sort
+        mergeSort(arr)
+    elif sys.argv[3] == 6:# 6: Quick Sort
+        quickSort(arr)
+    elif sys.argv[3] > 6 or sys.argv[3] <= 0 :# Else: Not supported
+        print("This is not a Supported Option, use 1-6")
 	#Timer end
+    time_end = time.time()
 	#Print elapsed time for sorting.
-
+    time_elapsed = (time_end - time_start)
+    print("Time Elapsed: ", time_elapsed, "seconds")
 	#Print numbers only when the cnt is less than 100
     if len(arr) < 100:
         print('After sort: ')
