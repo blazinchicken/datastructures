@@ -15,7 +15,7 @@ def bubbleSort(arr):
         for j in range(0, n-i-1):
             #if out of order: swap
             if arr[j] > arr[j+1]:
-                swap(arr, i, j+1)
+                swap(arr, j, j+1)
 
 def selectionSort(arr):
     n = len(arr)
@@ -139,7 +139,7 @@ def generateRandomNumbers(cnt, type):
 
     if type == 1: #type 1
         for i in range(cnt):
-            arr.append = randint(1,cnt)
+            arr.append(randint(1,cnt))
         return arr
     
     elif type == 2: #type 2
@@ -160,7 +160,7 @@ if __name__ == '__main__':
     # The parameters from the execution will be used as prameters for the generateRandomNumbers function below.
     # You must receive parameters from the command lines like below.
     # > python3 SortingArray.py 3 1000000 6 (create reverse-order numbers (0-1000000 and sort it using QuickSort) 
-    arr = generateRandomNumbers(sys.argv[1],sys.argv[2])
+    arr = generateRandomNumbers(int(sys.argv[1]),int(sys.argv[2]))
 
     if len(arr) < 100:
         print('Before sort: ')
@@ -178,9 +178,9 @@ if __name__ == '__main__':
     elif sys.argv[3] == 4:# 4: Shell Sort
         shellSort(arr)
     elif sys.argv[3] == 5:# 5: Merge Sort
-        mergeSort(arr)
+        mergeSort(arr, [0]*len(arr), 0, len(arr) - 1)
     elif sys.argv[3] == 6:# 6: Quick Sort
-        quickSort(arr)
+        quickSort(arr, 0, len(arr) - 1)
     elif sys.argv[3] > 6 or sys.argv[3] <= 0 :# Else: Not supported
         print("This is not a Supported Option, use 1-6")
 	#Timer end
