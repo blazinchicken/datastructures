@@ -160,7 +160,15 @@ if __name__ == '__main__':
     # The parameters from the execution will be used as prameters for the generateRandomNumbers function below.
     # You must receive parameters from the command lines like below.
     # > python3 SortingArray.py 3 1000000 6 (create reverse-order numbers (0-1000000 and sort it using QuickSort) 
-    arr = generateRandomNumbers(int(sys.argv[1]),int(sys.argv[2]))
+    if len(sys.argv) != 4:
+        print("Use: python3 SortingArray.py <type> <size> <algorithm>")
+        sys.exit(1)
+    
+    type = int(sys.argv[1])
+    cnt = int(sys.argv[2])
+    algorithm = int(sys.argv[3])
+
+    arr = generateRandomNumbers(cnt,type)
 
     if len(arr) < 100:
         print('Before sort: ')
@@ -169,25 +177,26 @@ if __name__ == '__main__':
     # Timer Start
     time_start = time.time()
 	# Sorting method will be provided as the second parameter for main args[2]
-    if sys.argv[3] == 1: # 1: Bubble Sort
+    if algorithm == 1: # 1: Bubble Sort
         bubbleSort(arr)
-    elif sys.argv[3] == 2:# 2: Selection Sort
+    elif algorithm == 2:# 2: Selection Sort
         selectionSort(arr)
-    elif sys.argv[3] == 3:# 3: Insertion Sort
+    elif algorithm == 3:# 3: Insertion Sort
         insertionSort(arr)
-    elif sys.argv[3] == 4:# 4: Shell Sort
+    elif algorithm == 4:# 4: Shell Sort
         shellSort(arr)
-    elif sys.argv[3] == 5:# 5: Merge Sort
+    elif algorithm == 5:# 5: Merge Sort
         mergeSort(arr, [0]*len(arr), 0, len(arr) - 1)
-    elif sys.argv[3] == 6:# 6: Quick Sort
+    elif algorithm == 6:# 6: Quick Sort
         quickSort(arr, 0, len(arr) - 1)
-    elif sys.argv[3] > 6 or sys.argv[3] <= 0 :# Else: Not supported
+    elif algorithm > 6 or sys.argv[3] <= 0 :# Else: Not supported
         print("This is not a Supported Option, use 1-6")
 	#Timer end
     time_end = time.time()
 	#Print elapsed time for sorting.
     time_elapsed = (time_end - time_start)
-    print("Time Elapsed: ", time_elapsed, "seconds")
+    time_elapsed = time_elapsed * 1000
+    print("Time Elapsed: ", time_elapsed, "milliseconds")
 	#Print numbers only when the cnt is less than 100
     if len(arr) < 100:
         print('After sort: ')
