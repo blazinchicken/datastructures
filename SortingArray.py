@@ -30,7 +30,6 @@ def selectionSort(arr):
     #put min number at front of sorted array
         swap(arr, i, min_idx)
 
-
 def insertionSort(arr):
     n = len(arr)
     for i in range(1, len(arr)):
@@ -42,7 +41,6 @@ def insertionSort(arr):
             arr[j+1] = arr[j]
             j -= 1
         arr[j+1] = key
-
 
 def shellSort(arr):
     n = len(arr)
@@ -117,7 +115,6 @@ def quickSort(arr, LEFT, RIGHT):
         quickSort(arr, LEFT, leftIdx-1)
         quickSort(arr, leftIdx, RIGHT)
 
-
 def swap(arr, i, j):
     temp = arr[i]
     arr[i] = arr[j]
@@ -136,19 +133,19 @@ def generateRandomNumbers(cnt, type):
     # The range of the generated numbers is 0 ~ cnt
     # type: 1: totally random numbers, 2: sorted_numbers, 3: reverse-order_numbers, else: not supported
     arr = []
-
-    if type == 1: #type 1
-        for i in range(cnt):
+    #recognize types of input from the command line
+    if type == 1: #type 1 random array fill
+        for i in range(cnt): 
             arr.append(randint(1,cnt))
         return arr
     
-    elif type == 2: #type 2
+    elif type == 2: #type 2 sorted array
         for i in range(cnt):
             arr.append(i)
         return arr
 
 
-    elif type == 3: #type 3
+    elif type == 3: #type 3 reverse sorted array
         for i in range(cnt, 0, -1):
             arr.append(i)
         return arr
@@ -160,11 +157,17 @@ if __name__ == '__main__':
     # The parameters from the execution will be used as prameters for the generateRandomNumbers function below.
     # You must receive parameters from the command lines like below.
     # > python3 SortingArray.py 3 1000000 6 (create reverse-order numbers (0-1000000 and sort it using QuickSort) 
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 4: #error handling if more or less than 3 arguments in command line
         print("Use: python3 SortingArray.py <type> <size> <algorithm>")
         sys.exit(1)
-    
-    type = int(sys.argv[1])
+    if sys.argv[1].isdigit() is False: #error handling if the values arent digits
+        exit()
+    if sys.argv[2].isdigit() is False:
+        exit()
+    if sys.argv[3].isdigit() is False:
+        exit()
+
+    type = int(sys.argv[1]) #set values to ints
     cnt = int(sys.argv[2])
     algorithm = int(sys.argv[3])
 
@@ -194,7 +197,7 @@ if __name__ == '__main__':
 	#Timer end
     time_end = time.time()
 	#Print elapsed time for sorting.
-    time_elapsed = (time_end - time_start)
+    time_elapsed = (time_end - time_start) #calculate time in milliseconds
     time_elapsed = time_elapsed * 1000
     print("Time Elapsed: ", time_elapsed, "milliseconds")
 	#Print numbers only when the cnt is less than 100
