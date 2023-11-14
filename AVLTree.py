@@ -135,9 +135,40 @@ class AVLTree:
         #Write your code here
         #You need to adjust return value
         return None
+    
+    def delete(self,key):
+
+
+        return None
+    
+def printMenu(): #Print Menu for AVL Tree
+    print("========== AVL MENU ==========")
+    print(" 0. Show Menu\n 1. Insert A New Key\n 2. Check if Key Exists\n 3. Find The Node's Height\n 4. Find the Node's Depth\n 5. Find the Minimum Value")
+    print(" 6. Find the Maximum Value\n 7. Print Tree\n 8. Delete a Key\n 9. Exit")
+    return None
+
 
 if __name__ == '__main__':
     avlTree = AVLTree()
+    exitCall = 0
+while exitCall != 0:
+    printMenu()
+    input = print("> ")
+    if input != range(10):
+        print("Menu only supports commands 0-9, please choose another option")
+    elif input == 0:
+        printMenu()
+    elif input == 1:
+        key = print("Input a Key: ")
+        avlTree.insert(key)
+        print(key, "is added to the Tree")
+    elif input == 2:
+        key = print("Input a Key: ")
+        avlTree.contains(key)
+    
+    
+        
+    
 
     # Show your menu here and call AvlTree function with parameters
     avlTree.insert(5)
