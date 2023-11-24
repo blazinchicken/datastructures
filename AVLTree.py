@@ -151,26 +151,41 @@ def printMenu(): #Print Menu for AVL Tree
 if __name__ == '__main__':
     avlTree = AVLTree()
     exitCall = 0
-while exitCall != 0:
-    printMenu()
-    input = print("> ")
-    if input != range(10):
-        print("Menu only supports commands 0-9, please choose another option")
-    elif input == 0:
-        printMenu()
-    elif input == 1:
-        key = print("Input a Key: ")
-        avlTree.insert(key)
-        print(key, "is added to the Tree")
-    elif input == 2:
-        key = print("Input a Key: ")
-        avlTree.contains(key)
-    
-    
-        
-    
 
     # Show your menu here and call AvlTree function with parameters
     avlTree.insert(5)
     avlTree.insert(10)
     avlTree.print_tree()
+
+    while exitCall != 0:
+        printMenu()
+        input = print("> ")
+        if input != range(10):
+            print("Menu only supports commands 0-9, please choose another option")
+            if input == 0: #show menu
+                printMenu()
+            elif input == 1: #insert new key
+                key = print("Input a Key: ")
+                avlTree.insert(key)
+                print(key, "is added to the Tree")
+            elif input == 2: # check if key exists
+                key = print("Input a Key: ")
+                avlTree.contains(key)
+            elif input == 3: #find height
+                key = print("Insert Node: ")
+                avlTree.height(key)
+            elif input == 4: #find depth
+                key = print("Insert Node: ")
+                avlTree.depth(key)
+            elif input == 5: #find minimum value
+                avlTree.findMin()
+            elif input == 6: #find max value
+                avlTree.findMax()
+            elif input == 7: #print tree
+                avlTree.print_tree()
+            elif input == 8: # delete a key
+                key = print("Input a Key: ")
+                avlTree.delete(key)
+            elif input == 9: #exit
+                exitCall = 1
+    
