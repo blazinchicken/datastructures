@@ -71,10 +71,46 @@ class AVLTree:
 
         return False
 
-    def insert(self, key):
+    def insert(self, key): #def from slides, first function
         #Write your code here
+        if self.root is None:
+            self.root = AvlNode(key)
+        else:
+            self.root = self._insert(key,self.root)
         #You need to adjust return value
         return None
+    
+    def _insert(self,key,node):
+        if node is None:
+            new_node = AvlNode(key)
+            return new_node
+        
+        compareResult = self.compare(key, node.key)
+
+        if compareResult < 0:
+            node.left = self._insert(key, node.left)
+            
+        if (self.height(node.left) - self.height(node.right)) == 2:
+            compareResult = self.compare(key, node.left.key)
+
+            if compareResult < 0:
+                node = self.rotate_with_left_child(node)
+            else:
+                node = self.double_rotate_with_left_child(node)
+        elif compareResult > 0:
+            node.right = self._insert(key, node.right)
+
+            #check balance
+            #node added to the right. only -2 is possible for checking
+            if (self.height(node.left) - self.height(node.right)) == -2:
+                compareResult = self.compare(key, node.right.key)
+
+                if compareResult > 0:
+                    node = self.rotate_with_right_child(node)
+                else:
+                    node = self.double_rotate_with_right_child(node)
+        node.height = max(self.height(node.left), self.height(node.right)) + 1
+        return node
 
     def contains (self, key):
         # Write your code here
@@ -157,35 +193,42 @@ if __name__ == '__main__':
     avlTree.insert(10)
     avlTree.print_tree()
 
-    while exitCall != 0:
+    while exitCall == 0:
         printMenu()
-        input = print("> ")
-        if input != range(10):
-            print("Menu only supports commands 0-9, please choose another option")
-            if input == 0: #show menu
+
+        try:
+            choice = int(input("> "))
+        except TypeError:
+            print("Please enter a valid Number")
+        except ValueError:
+            print("Please enter a valid Number")
+            continue
+        
+        if choice == 0: #show menu
                 printMenu()
-            elif input == 1: #insert new key
-                key = print("Input a Key: ")
-                avlTree.insert(key)
-                print(key, "is added to the Tree")
-            elif input == 2: # check if key exists
-                key = print("Input a Key: ")
-                avlTree.contains(key)
-            elif input == 3: #find height
-                key = print("Insert Node: ")
-                avlTree.height(key)
-            elif input == 4: #find depth
-                key = print("Insert Node: ")
-                avlTree.depth(key)
-            elif input == 5: #find minimum value
-                avlTree.findMin()
-            elif input == 6: #find max value
-                avlTree.findMax()
-            elif input == 7: #print tree
-                avlTree.print_tree()
-            elif input == 8: # delete a key
-                key = print("Input a Key: ")
-                avlTree.delete(key)
-            elif input == 9: #exit
-                exitCall = 1
+        elif choice == 1: #insert new key
+            key = print("Input a Key: ")
+            print(avlTree.insert(key), "is added to the Tree")
+        elif choice == 2: # check if key exists
+            key = print("Input a Key: ")
+            avlTree.contains(key)
+        elif choice == 3: #find height
+            key = print("Insert Node: ")
+            avlTree.height(key)
+        elif choice == 4: #find depth
+            key = print("Insert Node: ")
+            avlTree.depth(key)
+        elif choice == 5: #find minimum value
+            avlTree.findMin()
+        elif choice == 6: #find max value
+            avlTree.findMax()
+        elif choice == 7: #print tree
+            avlTree.print_tree()
+        elif choice == 8: # delete a key
+            key = print("Input a Key: ")
+            avlTree.delete(key)
+        elif choice == 9: #exit
+            exitCall = 1
+        else:
+            print("Invalid Choice, Choose between 1-9")
     
