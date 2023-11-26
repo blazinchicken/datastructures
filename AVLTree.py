@@ -115,20 +115,45 @@ class AVLTree:
     def contains (self, key):
         # Write your code here
         # You need to adjust return value
-        return None
+        return self._contains(self.root, key)
+
+    def _contains (self, node, key):
+        if node is None:
+            return False
+        
+        if key == node.key:
+            return True
+        elif key < node.key:
+            return self._contains(node.left, key)
+        else: 
+            return self._contains(node.right, key)
+        
 
     # Return the height of node t, or -1, if not found.
     def height(self, key):
         #Write your code here
+        if key is None:
+            return -1
         #You need to adjust return value
-        return -1
+        return key.height
 
     # Return the depth of node t, or -1, if not found.
     def depth(self, key):
         #Write your code here
         #You need to adjust return value
-        return -1
+        return self._depth(self.root, key, 0)
 
+    def _depth(self, node, key, current_depth):
+        if node is None:
+            return -1
+        
+        if key == node.key:
+            return current_depth
+        elif key < node.key:
+            return self._depth(node.left, key, current_depth + 1)
+        else:
+            return self._depth(node.right, key, current_depth + 1)
+        
     def findMin(self, node=None):
         #Write your code here
         #You need to adjust return value
@@ -151,26 +176,39 @@ class AVLTree:
     def rotate_with_left_child(self, k2):
         #LL rotation
         #Write your code here
+        k1 = k2.left
+        k2.left = k1.right
+        k1.right = k2
+        k2.height = max(self.height(k2.left), self.height(k2.right)) + 1
+        k1.height = max(self.height(k1.left), self.height(k2)) + 1
         #You need to adjust return value
-        return None
+        return k1
 
     def rotate_with_right_child(self, k2):
         #RR rotation
         #Write your code here
+        k1 = k2.right
+        k2.right = k1.left
+        k1.left = k1
+        k2.height = max(self.height(k2.left), self.height(k2.right)) + 1
+        k1.height = max(self.height(k1.right), self.height(k2)) + 1
         #You need to adjust return value
         return None
 
     def double_rotate_with_left_child(self, k3):
         # LR rotation
         #Write your code here
+        k3.left = self.rotate_with_right_child(k3.left)
+        return self.rotate_with_left_child(k3)
         #You need to adjust return value
-        return None
 
     def double_rotate_with_right_child(self, k3):
         # RL rotation
         #Write your code here
+        k3.right = self.rotate_with_left_child(k3.right)
+        return self.rotate_with_right_child(k3)
         #You need to adjust return value
-        return None
+        
     
     def delete(self,key):
 
