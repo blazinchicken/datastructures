@@ -82,8 +82,8 @@ class AVLTree:
     
     def _insert(self,key,node):
         if node is None:
-            new_node = AvlNode(key)
-            return new_node
+            return AvlNode(key)
+            
         
         compareResult = self.compare(key, node.key)
 
@@ -109,7 +109,7 @@ class AVLTree:
                     node = self.rotate_with_right_child(node)
                 else:
                     node = self.double_rotate_with_right_child(node)
-        node.height = max(self.height(node.left), self.height(node.right)) + 1
+        node.height = max(self.height(node.left), self.height(node.right)) + 1 if node else 0
         return node
 
     def contains (self, key):
@@ -130,12 +130,12 @@ class AVLTree:
         
 
     # Return the height of node t, or -1, if not found.
-    def height(self, key):
+    def height(self, node):
         #Write your code here
-        if key is None:
+        if node is None:
             return -1
         #You need to adjust return value
-        return key.height
+        return node.height
 
     # Return the depth of node t, or -1, if not found.
     def depth(self, key):
@@ -156,13 +156,31 @@ class AVLTree:
         
     def findMin(self, node=None):
         #Write your code here
+        if self.root is None:
+            print("Tree is Empty")
+            return None
         #You need to adjust return value
-        return 0
+        return self._findmMin(self.root).key
 
+    def _findMin(self, node):
+        current = node
+        while current.left is not None:
+            current = current.left
+        return current
+    
     def findMax(self, node=None):
         #Write your code here
+        if self.root is None:
+            print("Tree is Empty")
+            return None
         #You need to adjust return value
-        return 0
+        return self._findMax(self.root).key
+    
+    def _findMax(self, node):
+        current = node
+        while current.right is not None:
+            current = current.right
+        return current
 
     # Implemented
     def compare(self, x, y):
@@ -210,10 +228,58 @@ class AVLTree:
         #You need to adjust return value
         
     
-    def delete(self,key):
+    def delete(self, key):
+        #Delete 1st function
+        if self.root is None:
+            print("Tree is Empty")
+            return None
+        
+        success, self.root = self._delete(key, self.root)
+        if success:
+            print(key, "is deleted from the Tree")
+        else:
+            print(key, "is not found in the Tree")
+    
+    def _delete(self, key, node):
+        if node is None:
+            return False, None
+        
+        compare_result = self.compare(key, node.key)
 
+        if compare_result < 0:
+            deleted, node.left = self._delete(key, node.left)
+        elif compare_result > 0:
+            deleted, node.right = self._delete(key, node.right)
+        else: #found node
+            deleted = True
+            if node.left is None:
+                return deleted, node.right
+            elif node.right is None:
+                return deleted, node.left
+            else: #2 children
+                min_node = self.findMin(node.right)
+                node.key = min_node.key
+                deleted, node.right = self._delete(min_node.key, node.right)
+        
+        if deleted:
+            node.height = 1 + max(self.height(node.left), self.height(node.right))
+            balance = self.balance_factor(node)
 
-        return None
+            #time for rebalance
+            if balance > 1:
+                if key < node.left.key:
+                    return False, self.rotate_with_right_child(node)
+                else: 
+                    return False, self.double_rotate_with_right_child(node)
+            elif balance < -1:
+                if key > node.right.key:
+                    return False, self.rotate_with_left_child(node)
+                else:
+                    return False, self.double_rotate_with_left_child(node)
+        return deleted, node
+    
+    def balance_factor(self, node):
+        return self.height(node.left) - self.height(node.right)
     
 def printMenu(): #Print Menu for AVL Tree
     print("========== AVL MENU ==========")
@@ -246,13 +312,14 @@ if __name__ == '__main__':
                 printMenu()
         elif choice == 1: #insert new key
             key = int(input("Input a Key: "))
-            print(avlTree.insert(key), "is added to the Tree")
+            avlTree.insert(key)
+            print(key, "is added to the Tree")
         elif choice == 2: # check if key exists
             key = int(input("Input a Key: "))
             result = avlTree.contains(key)
             if result is not None:
                 print(result, " is part of the tree")
-            else
+            else:
                 print(key, "is not in the tree")
 
         elif choice == 3: #find height
@@ -262,9 +329,9 @@ if __name__ == '__main__':
             key = int(input("Input a Node: "))
             avlTree.depth(key)
         elif choice == 5: #find minimum value
-            avlTree.findMin()
+            print(avlTree.findMin(), " is the minimum value in the Tree")
         elif choice == 6: #find max value
-            avlTree.findMax()
+            print(avlTree.findMax()," is the max value in the Tree")
         elif choice == 7: #print tree
             avlTree.print_tree()
         elif choice == 8: # delete a key
