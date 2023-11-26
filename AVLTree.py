@@ -78,7 +78,7 @@ class AVLTree:
         else:
             self.root = self._insert(key,self.root)
         #You need to adjust return value
-        return None
+        return key
     
     def _insert(self,key,node):
         if node is None:
@@ -245,16 +245,21 @@ if __name__ == '__main__':
         if choice == 0: #show menu
                 printMenu()
         elif choice == 1: #insert new key
-            key = print("Input a Key: ")
+            key = int(input("Input a Key: "))
             print(avlTree.insert(key), "is added to the Tree")
         elif choice == 2: # check if key exists
-            key = print("Input a Key: ")
-            avlTree.contains(key)
+            key = int(input("Input a Key: "))
+            result = avlTree.contains(key)
+            if result is not None:
+                print(result, " is part of the tree")
+            else
+                print(key, "is not in the tree")
+
         elif choice == 3: #find height
-            key = print("Insert Node: ")
+            key = int(input("Input a Node: "))
             avlTree.height(key)
         elif choice == 4: #find depth
-            key = print("Insert Node: ")
+            key = int(input("Input a Node: "))
             avlTree.depth(key)
         elif choice == 5: #find minimum value
             avlTree.findMin()
@@ -263,9 +268,10 @@ if __name__ == '__main__':
         elif choice == 7: #print tree
             avlTree.print_tree()
         elif choice == 8: # delete a key
-            key = print("Input a Key: ")
+            key = int(input("Input a Key: "))
             avlTree.delete(key)
-        elif choice == 9: #exit
+        elif choice == 9:
+            print("Exited Menu") #exit
             exitCall = 1
         else:
             print("Invalid Choice, Choose between 1-9")
