@@ -78,39 +78,45 @@ class AVLTree:
         else:
             self.root = self._insert(key,self.root)
         #You need to adjust return value
-        return key
     
-    def _insert(self,key,node):
+    def _insert(self, key, node):
         if node is None:
             return AvlNode(key)
-            
-        
+
         compareResult = self.compare(key, node.key)
 
         if compareResult < 0:
             node.left = self._insert(key, node.left)
-            
-        if (self.height(node.left) - self.height(node.right)) == 2:
-            compareResult = self.compare(key, node.left.key)
 
-            if compareResult < 0:
-                node = self.rotate_with_left_child(node)
-            else:
-                node = self.double_rotate_with_left_child(node)
+        # Check balance
+            if self.height(node.left) - self.height(node.right) == 2:
+                compareResult = self.compare(key, node.left.key)
+
+                if compareResult < 0:
+                # LL rotation
+                    return self.rotate_with_left_child(node)
+                else:
+                # LR rotation
+                    return self.double_rotate_with_left_child(node)
         elif compareResult > 0:
             node.right = self._insert(key, node.right)
 
-            #check balance
-            #node added to the right. only -2 is possible for checking
-            if (self.height(node.left) - self.height(node.right)) == -2:
+        # Check balance
+            if self.height(node.right) - self.height(node.left) == 2:
                 compareResult = self.compare(key, node.right.key)
 
                 if compareResult > 0:
-                    node = self.rotate_with_right_child(node)
+                # RR rotation
+                    return self.rotate_with_right_child(node)
                 else:
-                    node = self.double_rotate_with_right_child(node)
-        node.height = max(self.height(node.left), self.height(node.right)) + 1 if node else 0
+                # RL rotation
+                    return self.double_rotate_with_right_child(node)
+
+    # Update height after insertion
+        node.height = max(self.height(node.left), self.height(node.right)) + 1
         return node
+
+
 
     def contains (self, key):
         # Write your code here
@@ -136,6 +142,20 @@ class AVLTree:
             return -1
         #You need to adjust return value
         return node.height
+    
+    def findNode(self, key):
+        return self._findNode(self.root, key)
+    
+    def _findNode(self, node, key):
+        if node is None:
+            return None
+        
+        if key == node.key:
+            return node
+        elif key < node.key:
+            return self._findNode(node.left, key)
+        else:
+            return self._findNode(node.right, key)
 
     # Return the depth of node t, or -1, if not found.
     def depth(self, key):
@@ -160,7 +180,7 @@ class AVLTree:
             print("Tree is Empty")
             return None
         #You need to adjust return value
-        return self._findmMin(self.root).key
+        return self._findMin(self.root).key
 
     def _findMin(self, node):
         current = node
@@ -207,11 +227,11 @@ class AVLTree:
         #Write your code here
         k1 = k2.right
         k2.right = k1.left
-        k1.left = k1
+        k1.left = k2
         k2.height = max(self.height(k2.left), self.height(k2.right)) + 1
         k1.height = max(self.height(k1.right), self.height(k2)) + 1
         #You need to adjust return value
-        return None
+        return k1
 
     def double_rotate_with_left_child(self, k3):
         # LR rotation
@@ -284,7 +304,7 @@ class AVLTree:
 def printMenu(): #Print Menu for AVL Tree
     print("========== AVL MENU ==========")
     print(" 0. Show Menu\n 1. Insert A New Key\n 2. Check if Key Exists\n 3. Find The Node's Height\n 4. Find the Node's Depth\n 5. Find the Minimum Value")
-    print(" 6. Find the Maximum Value\n 7. Print Tree\n 8. Delete a Key\n 9. Exit")
+    print(" 6. Find the Maximum Value\n 7. Print Tree\n 8. Exit")
     return None
 
 
@@ -321,23 +341,23 @@ if __name__ == '__main__':
                 print(result, " is part of the tree")
             else:
                 print(key, "is not in the tree")
-
         elif choice == 3: #find height
             key = int(input("Input a Node: "))
-            avlTree.height(key)
+            nodeToFind = avlTree.findNode(key)
+            if nodeToFind is not None:
+                print(avlTree.height(nodeToFind), "is the height of that Node")
+            else:
+                print("Node with key", key, "not found in the tree")
         elif choice == 4: #find depth
             key = int(input("Input a Node: "))
-            avlTree.depth(key)
+            print(avlTree.depth(key), "is the depth of that Node")
         elif choice == 5: #find minimum value
             print(avlTree.findMin(), " is the minimum value in the Tree")
         elif choice == 6: #find max value
             print(avlTree.findMax()," is the max value in the Tree")
         elif choice == 7: #print tree
             avlTree.print_tree()
-        elif choice == 8: # delete a key
-            key = int(input("Input a Key: "))
-            avlTree.delete(key)
-        elif choice == 9:
+        elif choice == 8:
             print("Exited Menu") #exit
             exitCall = 1
         else:
