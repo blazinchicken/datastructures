@@ -1,0 +1,35 @@
+
+def findPair(arr, type):
+    n = len(arr)
+    return None
+
+def generateRandomNumbers(cnt):
+    print("This line is only for running skeleton code. Remove this line.")
+    return []
+
+def printArray(arr):
+    n = len(arr)
+
+    for i in range(0, n):
+        print(str(arr[i]) + ' ', end=' ')
+
+        print('\n')
+
+if __name__ == '__main__':
+# The parameters from the execution will be used as prameters for the generateRandomNumbers function below.
+    
+# You must receive parameters, i.e., N, K, Algorithm from the command lines like below.
+# Python3 SortingArray.py 10000 500 0
+    N = 0 # how many random numbers
+    K = 0 # Sum of two numbers looking for
+    Algorithm = 0 # Your algorithm 0, 1, 2
+
+    arr = generateRandomNumbers (N)
+
+    if len(arr) < 100:
+        print('Generated numbers')
+        printArray(arr)
+# Timer Start
+        pair = findPair(arr, Algorithm)
+#Timer end
+#Print elapsed time for searching.
