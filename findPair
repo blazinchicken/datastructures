@@ -1,27 +1,53 @@
 
-import math
 from random import randint
 import sys
 import time
 
-def findPair(arr, type):
+def findPair(arr, type, sum):
     n = len(arr)
 
     if type == 0:
-        nestedLoops(arr)
+        if nestedLoops(arr,sum) is False:
+            return False
     elif type == 1:
         sortingAlgorithm(arr)
     else:
         hashTable(arr)
     return 
 
-def nestedLoops(arr):
-    return 
+def nestedLoops(arr, sum):
+    n = len(arr)
+    
+    for l in range(n):
+        for j in range(l + 1, n):
+            if arr[l] + arr[j] == sum:
+                return arr[l], arr[j]
+            
+    return None
 
-def sortingAlgorithm(arr):
-    return
+def sortingAlgorithm(arr,sum):
+    arr.sort()
+
+    left = 0
+    right = len(arr) - 1
+
+    while left < right:
+        active_sum = arr[left] + arr[right]
+
+        if active_sum == sum:
+            return arr[left], arr[right]
+        elif active_sum < sum:
+            left += 1
+        else:
+            right += 1
+    
+    return None
+    
 
 def hashTable(arr):
+
+    if foundPair is False:
+        return False
     return
 
 def generateRandomNumbers(cnt):
@@ -66,6 +92,13 @@ if __name__ == '__main__':
         print('Generated numbers')
         printArray(arr)
 # Timer Start
-        pair = findPair(arr, Algorithm)
+    time_start = time.time()
+    pair = findPair(arr, Algorithm)
+    
 #Timer end
+    time_end = time.time()
+    
 #Print elapsed time for searching.
+    time_elapsed = (time_end - time_start) #calculate time in milliseconds
+    time_elapsed = time_elapsed * 1000
+    print("Time Elapsed: ", time_elapsed, "milliseconds")
