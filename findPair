@@ -1,0 +1,71 @@
+
+import math
+from random import randint
+import sys
+import time
+
+def findPair(arr, type):
+    n = len(arr)
+
+    if type == 0:
+        nestedLoops(arr)
+    elif type == 1:
+        sortingAlgorithm(arr)
+    else:
+        hashTable(arr)
+    return 
+
+def nestedLoops(arr):
+    return 
+
+def sortingAlgorithm(arr):
+    return
+
+def hashTable(arr):
+    return
+
+def generateRandomNumbers(cnt):
+    arr = []
+
+    for i in range(cnt):    
+        arr.append(randint(1,cnt))
+    
+    return arr
+
+def printArray(arr):
+    n = len(arr)
+
+    for i in range(0, n):
+        print(str(arr[i]) + ' ', end=' ')
+
+        print('\n')
+
+if __name__ == '__main__':
+# The parameters from the execution will be used as prameters for the generateRandomNumbers function below.
+    if len(sys.argv) != 4: #error handling if more or less than 3 arguments in command line
+        print("Use: python3 findPair.py <count> <sum> <algorithm>")
+        sys.exit(1)
+    if sys.argv[1].isdigit() is False: #error handling if the values arent digits
+        exit()
+    if sys.argv[2].isdigit() is False:
+        exit()
+    if sys.argv[3].isdigit() is False:
+        exit()
+    
+# You must receive parameters, i.e., N, K, Algorithm from the command lines like below.
+# Python3 SortingArray.py 10000 500 0
+    N = int(sys.argv[1]) # how many random numbers
+    K = int(sys.argv[2]) # Sum of two numbers looking for
+    Algorithm = int(sys.argv[3]) # Your algorithm 0, 1, 2
+    if Algorithm is not range(3):
+        exit
+
+    arr = generateRandomNumbers (N)
+
+    if len(arr) < 100:
+        print('Generated numbers')
+        printArray(arr)
+# Timer Start
+        pair = findPair(arr, Algorithm)
+#Timer end
+#Print elapsed time for searching.
