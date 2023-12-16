@@ -7,15 +7,15 @@ def findPair(arr, type, sum):
     n = len(arr)
 
     if type == 0:
-        if nestedLoops(arr,sum) is False:
-            return False
+        return nestedLoops(arr, sum)
     elif type == 1:
-        sortingAlgorithm(arr)
+        return sortingAlgorithm(arr, sum)
+    elif type == 2:
+        return hashTable(arr, sum)
     else:
-        hashTable(arr)
-    return 
+        return None
 
-def nestedLoops(arr, sum):
+def nestedLoops(arr, sum): #iterate through near every piece of the array O(n^2)
     n = len(arr)
     
     for l in range(n):
@@ -37,18 +37,25 @@ def sortingAlgorithm(arr,sum):
         if active_sum == sum:
             return arr[left], arr[right]
         elif active_sum < sum:
-            left += 1
+            right -= 1
         else:
-            right += 1
+            right -= 1
     
     return None
     
 
-def hashTable(arr):
+def hashTable(arr, sum):
+    hash_table = {} # use dict to handle collison
 
-    if foundPair is False:
-        return False
-    return
+    for num in arr:
+        complement = sum - num #what number to search for
+
+        if complement in hash_table:
+            return complement, num
+        else:
+            hash_table[num] = True
+    
+    return None
 
 def generateRandomNumbers(cnt):
     arr = []
@@ -64,7 +71,8 @@ def printArray(arr):
     for i in range(0, n):
         print(str(arr[i]) + ' ', end=' ')
 
-        print('\n')
+
+    print('\n')
 
 if __name__ == '__main__':
 # The parameters from the execution will be used as prameters for the generateRandomNumbers function below.
@@ -72,19 +80,19 @@ if __name__ == '__main__':
         print("Use: python3 findPair.py <count> <sum> <algorithm>")
         sys.exit(1)
     if sys.argv[1].isdigit() is False: #error handling if the values arent digits
-        exit()
+        exit("Error: None Digit Entered")
     if sys.argv[2].isdigit() is False:
-        exit()
+        exit("Error: None Digit Entered")
     if sys.argv[3].isdigit() is False:
-        exit()
+        exit("Error: None Digit Entered")
     
 # You must receive parameters, i.e., N, K, Algorithm from the command lines like below.
 # Python3 SortingArray.py 10000 500 0
     N = int(sys.argv[1]) # how many random numbers
     K = int(sys.argv[2]) # Sum of two numbers looking for
     Algorithm = int(sys.argv[3]) # Your algorithm 0, 1, 2
-    if Algorithm is not range(3):
-        exit
+    if Algorithm not in range(3):
+        exit("Error: Out of Bounds Input")
 
     arr = generateRandomNumbers (N)
 
@@ -93,12 +101,17 @@ if __name__ == '__main__':
         printArray(arr)
 # Timer Start
     time_start = time.time()
-    pair = findPair(arr, Algorithm)
+    pair = findPair(arr, Algorithm, K)
     
 #Timer end
     time_end = time.time()
     
 #Print elapsed time for searching.
-    time_elapsed = (time_end - time_start) #calculate time in milliseconds
-    time_elapsed = time_elapsed * 1000
+    time_elapsed = (time_end - time_start) * 1000 #calculate time in milliseconds
     print("Time Elapsed: ", time_elapsed, "milliseconds")
+
+    if pair:
+        print("Pair Found", pair)
+    else:
+        print("No pair found")
+
